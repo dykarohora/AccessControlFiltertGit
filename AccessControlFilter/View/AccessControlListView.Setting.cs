@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AccessControlFilter.Model.enums;
 
 namespace AccessControlFilter.View
 {
@@ -30,6 +31,26 @@ namespace AccessControlFilter.View
                 groupBox_allowList.Enabled = false;
                 groupBox_denyList.Enabled = false;
             }
+        }
+
+
+        private void radioButton_modeManual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (configModel.ActionMode != ACL_ActionMode.MANUAL_MODE)
+                configModel.ChangeManualMode();
+
+        }
+
+        private void radioButton_modeWhiteList_CheckedChanged(object sender, EventArgs e)
+        {
+            if (configModel.ActionMode != ACL_ActionMode.WHITE_LIST_MODE)
+                configModel.ChangeWhiteListMode();
+        }
+
+        private void radioButton_modeBlackList_CheckedChanged(object sender, EventArgs e)
+        {
+            if (configModel.ActionMode != ACL_ActionMode.BLACK_LIST_MODE)
+                configModel.ChangeBlackListMode();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AccessControlFilter.Model.enums
 {
-    enum ActionMode
+    enum ACL_ActionMode
     {
         MANUAL_MODE,
         WHITE_LIST_MODE,
