@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fiddler;
-using AccessControlFilter.View;
-using System.Windows.Forms;
-using AccessControlFilter.Model;
+﻿using AccessControlFilter.Model;
 using AccessControlFilter.Model.enums;
+using AccessControlFilter.View;
+using Fiddler;
+using System.Windows.Forms;
 
 [assembly: Fiddler.RequiredVersion("4.0.0.0")]
 
 namespace AccessControlFilter
 {
+
+
     public class ACLExtensionController : IAutoTamper
     {
         private TabPage oPage;
@@ -20,10 +17,16 @@ namespace AccessControlFilter
         private AccessControlListModel aclModel;
         private ConfigModel configModel;
 
+        delegate void AutoTamperRequestBeforeDelegate(Session oSession);
+        AutoTamperRequestBeforeDelegate autoTamper;
+
+        /// <summary>
+        /// Viewの生成と、シングルトンなModelインスタンスの取得
+        /// </summary>
         public ACLExtensionController()
         {
             oPage = new TabPage("ACL Filter");
-            aclView = new View.AccessControlListView();
+            aclView = new AccessControlListView();
             aclView.Dock = DockStyle.Fill;
             oPage.Controls.Add(aclView);
 
@@ -32,11 +35,41 @@ namespace AccessControlFilter
             configModel = ConfigModel.GetInstance();
         }
 
-        public void OnLoad()
+        /// <summary>
+        /// 動作モードに応じて実行するメソッドを切り替える
+        /// </summary>
+        /// <param name="oSession">キャプチャしたセッション</param>
+        public void AutoTamperRequestBefore(Session oSession)
         {
+            if (configModel.IsEnableFilter)
+            {
+                switch (configModel.ActionMode)
+                {
+                    case ACL_ActionMode.MANUAL_MODE:
+                        autoTamper = AutoTamperRequestBegore_ManualMode;
+                        break;
 
+                    case ACL_ActionMode.WHITE_LIST_MODE:
+                        autoTamper = AutoTamperRequestBefore_WhiteListMode;
+                        break;
+
+                    case ACL_ActionMode.BLACK_LIST_MODE:
+                        autoTamper = AutoTamperRequestBefore_BlackListMode;
+                        break;
+
+                    default:
+                        break;
+                }
+                if (autoTamper != null)
+                    autoTamper(oSession);
+            }
         }
 
+        /// <summary>
+        /// マニュアルモードでの動作。ACLに入っていない場合はメッセージボックスを表示し、
+        /// Allow/Denyを選択させる。
+        /// </summary>
+        /// <param name="oSession"></param>
         private void AutoTamperRequestBegore_ManualMode(Session oSession)
         {
             //飛んできたセッションからドメインを取得する
@@ -63,11 +96,14 @@ namespace AccessControlFilter
                     aclView.UpdateACLView();
                 }
             }
-
             //Deny Listに入っている場合はセッションをドロップする。
             AutoTamperRequestBefore_BlackListMode(oSession);
         }
 
+        /// <summary>
+        /// ホワイトリストモードでの動作。セッションがAllowListに入っていない場合はセッションをドロップする。
+        /// </summary>
+        /// <param name="oSession"></param>
         private void AutoTamperRequestBefore_WhiteListMode(Session oSession)
         {
             //AllowListに含まれていない場合は、セッションをドロップする
@@ -77,52 +113,33 @@ namespace AccessControlFilter
                 if (configModel.IsEnableHideSession)
                     oSession["ui-hide"] = "no";
             }
-            
+
         }
 
+        /// <summary>
+        /// ブラックリストモードでの動作。セッションがDenyListに入っている場合のみセッションをドロップする。
+        /// </summary>
+        /// <param name="oSession"></param>
         private void AutoTamperRequestBefore_BlackListMode(Session oSession)
         {
             //DenyListに含まれている場合は、セッションをドロップする
             if (aclModel.IsContainDenyList(oSession.hostname))
             {
                 oSession.oRequest.FailSession(500, "Block", "ACLFilter");
-                if(configModel.IsEnableHideSession)
+                if (configModel.IsEnableHideSession)
                     oSession["ui-hide"] = "no";
             }
         }
 
-        public void AutoTamperRequestBefore(Session oSession)
-        {
-            //oSession["ui-hide"] = "true";
-            if (configModel.IsEnableFilter)
-            {
-                switch (configModel.ActionMode)
-                {
-                    case ACL_ActionMode.MANUAL_MODE:
-                        AutoTamperRequestBegore_ManualMode(oSession);
-                        break;
-
-                    case ACL_ActionMode.WHITE_LIST_MODE:
-                        AutoTamperRequestBefore_WhiteListMode(oSession);
-                        break;
-
-                    case ACL_ActionMode.BLACK_LIST_MODE:
-                        AutoTamperRequestBefore_BlackListMode(oSession);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
-
         public void AutoTamperRequestAfter(Session oSession) { }
-        
+
         public void AutoTamperResponseAfter(Session oSession) { }
 
         public void AutoTamperResponseBefore(Session oSession) { }
 
         public void OnBeforeReturningError(Session oSession) { }
+
+        public void OnLoad() { }
 
         public void OnBeforeUnload() { }
     }

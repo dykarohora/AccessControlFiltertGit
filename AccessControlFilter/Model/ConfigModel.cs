@@ -9,57 +9,67 @@ namespace AccessControlFilter.Model
 {
     class ConfigModel
     {
-
         private static ConfigModel _settingModel = new ConfigModel();
 
         public bool IsEnableFilter { get; private set; } = false;
         public ACL_ActionMode ActionMode { get; private set; } = ACL_ActionMode.MANUAL_MODE;
         public bool IsEnableHideSession { get; private set; } = false;
 
-
-        private ConfigModel()
-        {
-
-        }
+        private ConfigModel() { }
 
         internal static ConfigModel GetInstance()
         {
             return _settingModel;
         }
 
-        internal void EnableFilter()
+        internal bool EnableFilter()
         {
-            IsEnableFilter = true;
+            if (IsEnableFilter == false)
+                IsEnableFilter = true;
+            else
+                return false;
+
+            return true;
         }
 
-        internal void DisableFilter()
+        internal bool DisableFilter()
         {
-            IsEnableFilter = false;
+            if (IsEnableFilter == true)
+                IsEnableFilter = false;
+            else
+                return false;
+
+            return true;
         }
 
         internal void ChangeManualMode()
         {
-            ActionMode = ACL_ActionMode.MANUAL_MODE;
+            if (ActionMode != ACL_ActionMode.MANUAL_MODE)
+                ActionMode = ACL_ActionMode.MANUAL_MODE;
         }
 
         internal void ChangeWhiteListMode()
         {
-            ActionMode = ACL_ActionMode.WHITE_LIST_MODE;
+            if (ActionMode != ACL_ActionMode.WHITE_LIST_MODE)
+                ActionMode = ACL_ActionMode.WHITE_LIST_MODE;
         }
 
         internal void ChangeBlackListMode()
         {
-            ActionMode = ACL_ActionMode.BLACK_LIST_MODE;
+            if (ActionMode != ACL_ActionMode.BLACK_LIST_MODE)
+                ActionMode = ACL_ActionMode.BLACK_LIST_MODE;
         }
 
         internal void EnableHideSession()
         {
-            IsEnableHideSession = true;
+            if (IsEnableHideSession == false)
+                IsEnableHideSession = true;
         }
 
         internal void DisableHideSession()
         {
-            IsEnableHideSession = false;
+            if (IsEnableHideSession == true)
+                IsEnableHideSession = false;
         }
     }
 }
