@@ -72,18 +72,28 @@ namespace AccessControlFilter
         {
             //AllowListに含まれていない場合は、セッションをドロップする
             if (!aclModel.IsContainAllowList(oSession.hostname))
+            {
                 oSession.oRequest.FailSession(500, "Block", "ACLFilter");
+                if (configModel.IsEnableHideSession)
+                    oSession["ui-hide"] = "no";
+            }
+            
         }
 
         private void AutoTamperRequestBefore_BlackListMode(Session oSession)
         {
             //DenyListに含まれている場合は、セッションをドロップする
             if (aclModel.IsContainDenyList(oSession.hostname))
+            {
                 oSession.oRequest.FailSession(500, "Block", "ACLFilter");
+                if(configModel.IsEnableHideSession)
+                    oSession["ui-hide"] = "no";
+            }
         }
 
         public void AutoTamperRequestBefore(Session oSession)
         {
+            //oSession["ui-hide"] = "true";
             if (configModel.IsEnableFilter)
             {
                 switch (configModel.ActionMode)

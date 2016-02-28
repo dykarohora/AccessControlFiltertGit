@@ -36,6 +36,9 @@
             this.groupBox_modeSetting = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton_hideSessionEnable = new System.Windows.Forms.RadioButton();
+            this.radioButton_hideSessionDisable = new System.Windows.Forms.RadioButton();
             this.groupBox_allowList = new System.Windows.Forms.GroupBox();
             this.button_allowListMoveDeny = new System.Windows.Forms.Button();
             this.button_allowListAdd = new System.Windows.Forms.Button();
@@ -53,18 +56,15 @@
             this.button_denyListClear = new System.Windows.Forms.Button();
             this.dataGridView_DenyList = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.groupBox_modeSetting.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox_allowList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_AllowList)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox_denyList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DenyList)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // radioButton_filterEnable
@@ -136,7 +136,6 @@
             this.groupBox_modeSetting.Controls.Add(this.radioButton_modeManual);
             this.groupBox_modeSetting.Controls.Add(this.radioButton_modeBlackList);
             this.groupBox_modeSetting.Controls.Add(this.radioButton_modeWhiteList);
-            this.groupBox_modeSetting.Enabled = false;
             this.groupBox_modeSetting.Location = new System.Drawing.Point(224, 22);
             this.groupBox_modeSetting.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_modeSetting.Name = "groupBox_modeSetting";
@@ -173,6 +172,45 @@
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Setting";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton_hideSessionEnable);
+            this.groupBox1.Controls.Add(this.radioButton_hideSessionDisable);
+            this.groupBox1.Location = new System.Drawing.Point(438, 24);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(196, 96);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Hide Session";
+            // 
+            // radioButton_hideSessionEnable
+            // 
+            this.radioButton_hideSessionEnable.AutoSize = true;
+            this.radioButton_hideSessionEnable.Location = new System.Drawing.Point(4, 19);
+            this.radioButton_hideSessionEnable.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton_hideSessionEnable.Name = "radioButton_hideSessionEnable";
+            this.radioButton_hideSessionEnable.Size = new System.Drawing.Size(83, 22);
+            this.radioButton_hideSessionEnable.TabIndex = 0;
+            this.radioButton_hideSessionEnable.Text = "Enable";
+            this.radioButton_hideSessionEnable.UseVisualStyleBackColor = true;
+            this.radioButton_hideSessionEnable.CheckedChanged += new System.EventHandler(this.radioButton_hideSessionEnable_CheckedChanged);
+            // 
+            // radioButton_hideSessionDisable
+            // 
+            this.radioButton_hideSessionDisable.AutoSize = true;
+            this.radioButton_hideSessionDisable.Checked = true;
+            this.radioButton_hideSessionDisable.Location = new System.Drawing.Point(4, 42);
+            this.radioButton_hideSessionDisable.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton_hideSessionDisable.Name = "radioButton_hideSessionDisable";
+            this.radioButton_hideSessionDisable.Size = new System.Drawing.Size(88, 22);
+            this.radioButton_hideSessionDisable.TabIndex = 1;
+            this.radioButton_hideSessionDisable.TabStop = true;
+            this.radioButton_hideSessionDisable.Text = "Disable";
+            this.radioButton_hideSessionDisable.UseVisualStyleBackColor = true;
+            this.radioButton_hideSessionDisable.CheckedChanged += new System.EventHandler(this.radioButton_hideSessionDisable_CheckedChanged);
             // 
             // groupBox_allowList
             // 
@@ -389,43 +427,6 @@
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn1.Width = 1249;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Location = new System.Drawing.Point(438, 24);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(196, 96);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter Activate";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(4, 19);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 22);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.Text = "Enable";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(4, 42);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(88, 22);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Disable";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // AccessControlListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
@@ -445,13 +446,13 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox_allowList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_AllowList)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox_denyList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DenyList)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -484,7 +485,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn domainColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton_hideSessionEnable;
+        private System.Windows.Forms.RadioButton radioButton_hideSessionDisable;
     }
 }

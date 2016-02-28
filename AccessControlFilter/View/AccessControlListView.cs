@@ -79,15 +79,5 @@ namespace AccessControlFilter.View
                 dataGridView_DenyList.Rows[idx].Cells[0].Value = domain;
             }
         }
-
-        private void radioButton_filterEnable_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton_filterDisable_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

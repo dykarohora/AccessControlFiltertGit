@@ -13,7 +13,9 @@ namespace AccessControlFilter.Model
         private static ConfigModel _settingModel = new ConfigModel();
 
         public bool IsEnableFilter { get; private set; } = false;
-        public ACL_ActionMode ActionMode { get; set; } = ACL_ActionMode.MANUAL_MODE;
+        public ACL_ActionMode ActionMode { get; private set; } = ACL_ActionMode.MANUAL_MODE;
+        public bool IsEnableHideSession { get; private set; } = false;
+
 
         private ConfigModel()
         {
@@ -34,10 +36,10 @@ namespace AccessControlFilter.Model
         {
             IsEnableFilter = false;
         }
-        
+
         internal void ChangeManualMode()
         {
-            ActionMode = ACL_ActionMode.MANUAL_MODE; 
+            ActionMode = ACL_ActionMode.MANUAL_MODE;
         }
 
         internal void ChangeWhiteListMode()
@@ -48,6 +50,16 @@ namespace AccessControlFilter.Model
         internal void ChangeBlackListMode()
         {
             ActionMode = ACL_ActionMode.BLACK_LIST_MODE;
+        }
+
+        internal void EnableHideSession()
+        {
+            IsEnableHideSession = true;
+        }
+
+        internal void DisableHideSession()
+        {
+            IsEnableHideSession = false;
         }
     }
 }

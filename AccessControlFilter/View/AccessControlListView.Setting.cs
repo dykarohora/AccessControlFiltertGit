@@ -15,7 +15,6 @@ namespace AccessControlFilter.View
             if (configModel.IsEnableFilter == false)
             {
                 configModel.EnableFilter();
-                groupBox_modeSetting.Enabled = true;
                 groupBox_allowList.Enabled = true;
                 groupBox_denyList.Enabled = true;
             }
@@ -27,7 +26,6 @@ namespace AccessControlFilter.View
             if (configModel.IsEnableFilter == true)
             {
                 configModel.DisableFilter();
-                groupBox_modeSetting.Enabled = false;
                 groupBox_allowList.Enabled = false;
                 groupBox_denyList.Enabled = false;
             }
@@ -51,6 +49,18 @@ namespace AccessControlFilter.View
         {
             if (configModel.ActionMode != ACL_ActionMode.BLACK_LIST_MODE)
                 configModel.ChangeBlackListMode();
+        }
+
+        private void radioButton_hideSessionEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (configModel.IsEnableHideSession == false)
+                configModel.EnableHideSession();
+        }
+
+        private void radioButton_hideSessionDisable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (configModel.IsEnableHideSession == true)
+                configModel.DisableHideSession();
         }
     }
 }
