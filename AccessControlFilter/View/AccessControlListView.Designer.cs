@@ -317,6 +317,7 @@
             this.button_denyListMoveAllow.TabIndex = 4;
             this.button_denyListMoveAllow.Text = "Move Allow";
             this.button_denyListMoveAllow.UseVisualStyleBackColor = true;
+            this.button_denyListMoveAllow.Click += new System.EventHandler(this.button_denyListMoveAllow_Click);
             // 
             // button_denyListAdd
             // 

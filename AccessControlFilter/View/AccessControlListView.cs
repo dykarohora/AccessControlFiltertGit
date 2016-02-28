@@ -79,5 +79,6 @@ namespace AccessControlFilter.View
                 dataGridView_DenyList.Rows[idx].Cells[0].Value = domain;
             }
         }
+
     }
 }

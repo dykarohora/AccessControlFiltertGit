@@ -33,7 +33,7 @@ namespace AccessControlFilter.View
             List<string> targetDomainList =
                 GetSelectedDomainList(dataGridView_AllowList.SelectedCells);
             //ACLモデルにドメインのリストを渡す
-
+            aclModel.MoveToDenyListFromAllowList(targetDomainList);
             //AllowListとDenyListの描画をアップデート
             UpdateACLView();
         }

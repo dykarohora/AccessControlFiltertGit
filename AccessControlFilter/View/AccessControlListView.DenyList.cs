@@ -22,5 +22,13 @@ namespace AccessControlFilter.View
             aclModel.DeleteRowFromDenyList(targetDomainList);
             UpdateDenyList();
         }
+
+        private void button_denyListMoveAllow_Click(object sender, EventArgs e)
+        {
+            List<string> targetDomainList =
+                GetSelectedDomainList(dataGridView_DenyList.SelectedCells);
+            aclModel.MoveToAllowListFromDenyList(targetDomainList);
+            UpdateACLView();
+        }
     }
 }

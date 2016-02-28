@@ -50,7 +50,13 @@ namespace AccessControlFilter.Model
                 AllowList.Remove(target);
         }
 
+        internal void MoveToDenyListFromAllowList(List<string> targetList)
+        {
+            foreach (var target in targetList)
+                DenyList.Add(target);
 
+            DeleteRowFromAllowList(targetList);
+        }
         //DenyListの操作
         internal bool IsContainDenyList(string domain)
         {
@@ -71,6 +77,14 @@ namespace AccessControlFilter.Model
         {
             foreach (var target in targetList)
                 DenyList.Remove(target);
+        }
+
+        internal void MoveToAllowListFromDenyList(List<string> targetList)
+        {
+            foreach (var target in targetList)
+                AllowList.Add(target);
+
+            DeleteRowFromDenyList(targetList);
         }
     }
 }
