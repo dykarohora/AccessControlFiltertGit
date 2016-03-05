@@ -66,8 +66,8 @@ namespace AccessControlFilter
         }
 
         /// <summary>
-        /// マニュアルモードでの動作。ACLに入っていない場合はメッセージボックスを表示し、
-        /// Allow/Denyを選択させる。
+        /// マニュアルモードでの動作。
+        /// ACLに入っていない場合はメッセージボックスを表示し、Allow/Denyを選択させる。
         /// </summary>
         /// <param name="oSession"></param>
         private void AutoTamperRequestBegore_ManualMode(Session oSession)
@@ -81,7 +81,6 @@ namespace AccessControlFilter
                 //Listに入っていなければメッセージボックスを表示する
                 if (!aclModel.IsContainAllowList(domain) && !aclModel.IsContainDenyList(domain))
                 {
-                    //UIスレッドを止めたい
                     if ((MessageBox.Show(domain + "への接続を許可しますか",
                         "確認", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1,
@@ -113,7 +112,6 @@ namespace AccessControlFilter
                 if (configModel.IsEnableHideSession)
                     oSession["ui-hide"] = "no";
             }
-
         }
 
         /// <summary>

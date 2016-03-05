@@ -45,7 +45,6 @@
             this.button_allowListDelete = new System.Windows.Forms.Button();
             this.button_allowListClear = new System.Windows.Forms.Button();
             this.dataGridView_AllowList = new System.Windows.Forms.DataGridView();
-            this.domainColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -55,6 +54,7 @@
             this.button_denyListDelete = new System.Windows.Forms.Button();
             this.button_denyListClear = new System.Windows.Forms.Button();
             this.dataGridView_DenyList = new System.Windows.Forms.DataGridView();
+            this.domainColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox_modeSetting.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -292,17 +292,6 @@
             this.dataGridView_AllowList.Size = new System.Drawing.Size(1252, 269);
             this.dataGridView_AllowList.TabIndex = 0;
             // 
-            // domainColumn
-            // 
-            this.domainColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.domainColumn.DividerWidth = 1;
-            this.domainColumn.HeaderText = "Domain";
-            this.domainColumn.Name = "domainColumn";
-            this.domainColumn.ReadOnly = true;
-            this.domainColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.domainColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.domainColumn.Width = 1249;
-            // 
             // button9
             // 
             this.button9.Location = new System.Drawing.Point(160, 31);
@@ -416,16 +405,26 @@
             this.dataGridView_DenyList.Size = new System.Drawing.Size(1252, 269);
             this.dataGridView_DenyList.TabIndex = 0;
             // 
+            // domainColumn
+            // 
+            this.domainColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.domainColumn.DividerWidth = 1;
+            this.domainColumn.HeaderText = "Domain";
+            this.domainColumn.Name = "domainColumn";
+            this.domainColumn.ReadOnly = true;
+            this.domainColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.domainColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.domainColumn.ToolTipText = "アクセスを許可するドメインのリストです";
+            // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn1.DividerWidth = 1;
             this.dataGridViewTextBoxColumn1.HeaderText = "Domain";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 1249;
             // 
             // AccessControlListView
             // 
@@ -482,10 +481,10 @@
         private System.Windows.Forms.Button button_denyListDelete;
         private System.Windows.Forms.Button button_denyListClear;
         private System.Windows.Forms.DataGridView dataGridView_DenyList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn domainColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButton_hideSessionEnable;
         private System.Windows.Forms.RadioButton radioButton_hideSessionDisable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn domainColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }

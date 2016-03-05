@@ -16,6 +16,8 @@ namespace AccessControlFilter.View
         private AccessControlListModel aclModel;
         private ConfigModel configModel;
 
+        private delegate void UpdateViewDelegate();
+
         public AccessControlListView()
         {
             InitializeComponent();
@@ -43,8 +45,16 @@ namespace AccessControlFilter.View
         /// </summary>
         public void UpdateACLView()
         {
-            UpdateAllowList();
-            UpdateDenyList();
+            //描画はUIスレッド、ワーカースレッドの両方から呼び出される可能性がある。
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new UpdateViewDelegate(UpdateAllowList));
+                this.Invoke(new UpdateViewDelegate(UpdateDenyList));
+            }
+            else {
+                UpdateAllowList();
+                UpdateDenyList();
+            }
         }
 
         /// <summary>
@@ -54,8 +64,10 @@ namespace AccessControlFilter.View
         {
             //AllowListをいったんクリアする
             dataGridView_AllowList.Rows.Clear();
+
             //AllowListを描画する
             List<string> allowList = aclModel.AllowList;
+
             foreach(var domain in allowList)
             {
                 dataGridView_AllowList.Rows.Add();
